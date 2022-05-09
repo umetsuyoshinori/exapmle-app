@@ -7,6 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Models\Tweet;
 
 class IndexController extends Controller
 {
@@ -18,8 +19,8 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $tweets = Tweet::all();
         return view('tweet.index')
-            ->with('name', 'laravel')
-            ->with('version', '8');
+            ->with('tweets', $tweets);
     }
 }
