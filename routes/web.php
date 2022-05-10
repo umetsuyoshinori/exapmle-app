@@ -23,6 +23,7 @@ Route::get('/sample',[\App\Http\Controllers\Sample\IndexController::class,"show"
 Route::get('/sample/{id}',[\App\Http\Controllers\Sample\IndexController::class,"showId"]
 );
 
+// nameメソッドでルートに命名。再利用しやすくなる。
 Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class) ->name('tweet.index');
 
 // /tweet/createにPOSTリクエストされたときに、Tweet\Createコントローラが呼ばれる
