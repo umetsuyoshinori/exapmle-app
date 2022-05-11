@@ -18,13 +18,11 @@
         <span>140文字まで</span>
         <?php // textareaのname要素の値"tweet"は、CreateRequestクラスのrules()の中の"tweet"と紐づく ?>
         <textarea id="tweet-content" type="text" name="tweet" placeholder="つぶやきを入力"></textarea>
+        @error('tweet')
+        <p style="color: red;">{{ $message }}</p>
+        @enderror
         <button type="submit">投稿</button>
     </form>
-</div>
-<div>
-    @foreach($tweets as $tweet)
-        <p>{{ $tweet->content }}</p>
-    @endforeach
 </div>
 </body>
 </html>
