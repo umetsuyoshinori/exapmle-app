@@ -29,4 +29,10 @@ class CreateRequest extends FormRequest
             'tweet' => 'required|max:140'
         ];
     }
+
+    public function tweet():string
+    {
+        // inputは親クラスのメソッド
+        return $this->input("tweet");
+    }
 }
