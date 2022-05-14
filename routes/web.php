@@ -17,19 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sample',[\App\Http\Controllers\Sample\IndexController::class,"show"]
-);
+// Sample
+Route::get('/sample', [\App\Http\Controllers\Sample\IndexController::class, 'show']);
+Route::get('/sample/{id}', [\App\Http\Controllers\Sample\IndexController::class, 'showId']);
 
-Route::get('/sample/{id}',[\App\Http\Controllers\Sample\IndexController::class,"showId"]
-);
 
-// nameメソッドでルートに命名。再利用しやすくなる。
-Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class) ->name('tweet.index');
-
-// /tweet/createにPOSTリクエストされたときに、Tweet\Createコントローラが呼ばれる
-Route::post('/tweet/create', \App\Http\Controllers\Tweet\CreateController::class) ->name('tweet.create');
-
-Route::get('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\IndexController::class)->name('tweet.update.index')->where('tweetId', '[0-9]+');
-Route::put('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\PutController::class)->name('tweet.update.put')->where('tweetId', '[0-9]+');
-
+// Tweet
+Route::get('/tweet', \App\Http\Controllers\Tweet\IndexController::class)->name('tweet.index');
+Route::post('/tweet/create', \App\Http\Controllers\Tweet\CreateController::class)->name('tweet.create');
+Route::get('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\IndexController::class)->name('tweet.update.index');
+Route::put('/tweet/update/{tweetId}', \App\Http\Controllers\Tweet\Update\PutController::class)->name('tweet.update.put');
 Route::delete('/tweet/delete/{tweetId}', \App\Http\Controllers\Tweet\DeleteController::class)->name('tweet.delete');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
