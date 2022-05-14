@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
+use App\Services\TweetService;
 
 class IndexController extends Controller
 {
@@ -17,9 +18,9 @@ class IndexController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request,TweetService $tweetService)
     {
-        $tweets = Tweet::orderBy('created_at','DESC')->get();
+        $tweets = $tweetService->getTweets();
         return view('tweet.index')
             ->with('tweets', $tweets);
     }
