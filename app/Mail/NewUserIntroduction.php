@@ -3,12 +3,13 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+// 即時送信でなく、キューに積むメールはこちらをimplement
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 
-class NewUserIntroduction extends Mailable
+class NewUserIntroduction extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
